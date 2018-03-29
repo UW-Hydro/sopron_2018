@@ -26,6 +26,12 @@ then
 	exit ;
 fi
 
+# Switch to the notebook directory
+if [[ -e ${HOME}/sopron_2018/notebooks ]];
+then
+	cd ${HOME}/sopron_2018/notebooks
+fi
+
 # Create trap to kill notebook when user is done
 kill_server() {
 	if [[ $JNPID != -1 ]]; then

@@ -71,9 +71,14 @@ cd ${HOME}/summa
 make -f ${HOME}/sopron_2018/setup/Makefile-geyser
 cd ${HOME}
 
-# add the summa/bin directory to the path and source the ~/.bashrc again
+# add the summa/bin directory to the path
 cat << EOF >> ${HOME}/.bashrc
 export PATH="${HOME}/summa/bin:$PATH"
+EOF
+
+# add the start-notebook directory to the path
+cat << EOF >> ${HOME}/.bashrc
+export PATH="${HOME}/sopron_2018/setup:$PATH"
 EOF
 
 # Tell the user to log out and log back in

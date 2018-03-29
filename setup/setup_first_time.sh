@@ -50,11 +50,10 @@ curl -O -L https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 # install miniconda
 /bin/bash Miniconda3-latest-Linux-x86_64.sh -b
 
-# add the miniconda3 path to your .bashrc and source the ~/.bashrc
+# add the miniconda3 path to your .bashrc and
 cat << EOF >> ~/.bashrc
-export PATH="${HOME}:$PATH"
+export PATH="${HOME}/miniconda3/bin:$PATH"
 EOF
-source ${HOME}/.bashrc
 
 # create the pysumma environment
 conda env create -f ${HOME}/sopron_2018/setup/pysumma_env.yml
@@ -76,3 +75,14 @@ cd ${HOME}
 cat << EOF >> ${HOME}/.bashrc
 export PATH="${HOME}/summa/bin:$PATH"
 EOF
+
+# Tell the user to log out and log back in
+echo ""
+echo "Installation succesfull - now type "
+echo ""
+echo "source ~/.bashrc"
+echo ""
+echo "Followed by"
+echo ""
+echo "source activate pysumma"
+echo ""

@@ -68,7 +68,7 @@ module load lapack
 
 # Make SUMMA
 cd ${HOME}/summa
-make -f sopron_2018/setup/Makefile-geyser
+make -f ${HOME}/sopron_2018/setup/Makefile-geyser
 cd ${HOME}
 
 # add the summa/bin directory to the path and source the ~/.bashrc again

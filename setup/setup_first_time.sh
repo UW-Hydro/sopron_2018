@@ -44,20 +44,6 @@ git clone git://github.com/UW-Hydro/sopron_2018.git
 # Get the SUMMA source code and use the default branch as the default
 git clone -b develop git://github.com/NCAR/summa.git
 
-# Download the Miniconda installer for the python environment
-curl -O -L https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-
-# install miniconda
-/bin/bash Miniconda3-latest-Linux-x86_64.sh -b
-
-# add the miniconda3 path to your .bashrc and
-cat << EOF >> ~/.bashrc
-export PATH="${HOME}/miniconda3/bin:$PATH"
-EOF
-
-# create the pysumma environment
-conda env create -f ${HOME}/sopron_2018/setup/pysumma_env.yml
-
 # compile SUMMA
 
 # swap the default intel compiler for gfortran
@@ -71,17 +57,32 @@ cd ${HOME}/summa
 make -f ${HOME}/sopron_2018/setup/Makefile-geyser
 cd ${HOME}
 
-# add the summa/bin directory to the path
-cat << EOF >> ${HOME}/.bashrc
-export PATH="${HOME}/summa/bin:$PATH"
+# Download the Miniconda installer for the python environment
+curl -O -L https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+# install miniconda
+/bin/bash Miniconda3-latest-Linux-x86_64.sh -b
+
+# create the pysumma environment
+${HOME}/miniconda3/bin/conda env create -f ${HOME}/sopron_2018/setup/pysumma_env.yml
+
+# pre-load the correct modules on geyser
+# add the summa, sopron_2018, and miniconda3 path to your .bashrc and
+if [[ ! -f ${HOME}/.bashrc ]];
+then
+  touch ${HOME}/.bashrc
+fi
+
+cat << EOF >> ~/.bashrc
+if [[ ${HOSTNAME} ~= *"geyser"* ]];
+then
+  module swap intel gnu/6.1.0
+  module load lapack
+fi
+export PATH="${HOME}/summa/bin:${HOME}/sopron_2018/setup:${HOME}/miniconda3/bin:\$PATH"
 EOF
 
-# add the start-notebook directory to the path
-cat << EOF >> ${HOME}/.bashrc
-export PATH="${HOME}/sopron_2018/setup:$PATH"
-EOF
-
-# Tell the user to log out and log back in
+# Tell the user to source their bashrc
 echo ""
 echo "Installation succesfull - now type "
 echo ""

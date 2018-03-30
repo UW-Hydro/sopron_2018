@@ -74,12 +74,12 @@ then
 fi
 
 cat << EOF >> ~/.bashrc
-if [[ ${HOSTNAME} ~= *"geyser"* ]];
+if [[ \${HOSTNAME} = *"geyser"* ]];
 then
   module swap intel gnu/6.1.0
   module load lapack
 fi
-export PATH="${HOME}/summa/bin:${HOME}/sopron_2018/setup:${HOME}/miniconda3/bin:\$PATH"
+export PATH="\${HOME}/summa/bin:\${HOME}/sopron_2018/setup:\${HOME}/miniconda3/bin:\$PATH"
 EOF
 
 # Tell the user to source their bashrc

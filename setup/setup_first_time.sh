@@ -42,7 +42,7 @@ module load git/2.10.0
 git clone git://github.com/UW-Hydro/sopron_2018.git
 
 # Get the SUMMA source code and use the default branch as the default
-git clone -b develop git://github.com/NCAR/summa.git
+git clone -b sopron_2018 git://github.com/NCAR/summa.git
 
 # compile SUMMA
 

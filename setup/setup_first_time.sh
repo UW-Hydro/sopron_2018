@@ -67,13 +67,13 @@ curl -O -L https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 ${HOME}/miniconda3/bin/conda env create -f ${HOME}/sopron_2018/setup/pysumma_env.yml
 
 # pre-load the correct modules on geyser
-# add the summa, sopron_2018, and miniconda3 path to your .bashrc and
-if [[ ! -f ${HOME}/.bashrc ]];
+# add the summa, sopron_2018, and miniconda3 path to your .bash_profile and
+if [[ ! -f ${HOME}/.bash_profile ]];
 then
-  touch ${HOME}/.bashrc
+  touch ${HOME}/.bash_profile
 fi
 
-cat << EOF >> ~/.bashrc
+cat << EOF >> ~/.bash_profile
 if [[ \${HOSTNAME} = *"geyser"* ]];
 then
   module swap intel gnu/6.1.0
@@ -82,11 +82,16 @@ fi
 export PATH="\${HOME}/summa/bin:\${HOME}/sopron_2018/setup:\${HOME}/miniconda3/bin:\$PATH"
 EOF
 
+# Set the prompt to something useful
+cat << EOF >> ~/.bash_profile
+export PS1='\[\u@\h:\w> '
+EOF
+
 # Tell the user to source their bashrc
 echo ""
 echo "Installation succesfull - now type "
 echo ""
-echo "source ~/.bashrc"
+echo "source ~/.bash_profile"
 echo ""
 echo "Followed by"
 echo ""
